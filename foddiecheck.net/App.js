@@ -1,62 +1,61 @@
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
-import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { Component } from 'react';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  Button,
+  View
+} from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import FirstScreen from "./screens/FirstScreen"
+import CharRecScreen from "./screens/CharRecScreen"
 
-import AppNavigator from './navigation/AppNavigator';
+const styles = StyleSheet.create(
+{
+   container:
+   {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
 
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
+   text:
+   {
+      fontSize: 25,
+      color: 'black'
+   },
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
-    );
-  }
-}
-
-async function loadResourcesAsync() {
-  await Promise.all([
-    Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
-    ]),
-    Font.loadAsync({
-      // This is the font that we are using for our tab bar
-      ...Ionicons.font,
-      // We include SpaceMono because we use it in HomeScreen.js. Feel free to
-      // remove this if you are not using it in your app
-      'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-    }),
-  ]);
-}
-
-function handleLoadingError(error) {
-  // In this case, you might want to report the error to your error reporting
-  // service, for example Sentry
-  console.warn(error);
-}
-
-function handleFinishLoading(setLoadingComplete) {
-  setLoadingComplete(true);
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
+   buttonHolder:
+   {
+      paddingTop: 25
+   }
 });
+
+
+class SecondScreen extends Component
+{
+   static navigationOptions =
+   {
+      title: 'Second Screen',
+   };
+
+   render()
+   {
+      return(
+         <View style = { styles.container }>
+            <Text style = { styles.text }>
+               Second Screen.
+            </Text>
+         </View>
+      );
+   }
+}
+
+
+const AppNavigator = createStackNavigator({
+   First: FirstScreen,
+   Second: SecondScreen,
+   CharRec: CharRecScreen
+});
+
+export default createAppContainer(AppNavigator);
