@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Foddie check",
-    "slug": "foddiecheck.net",
+    "slug": "foddiecheck",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
