@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import FirstScreen from "./screens/FirstScreen"
+import SecondScreen from "./screens/SecondScreen"
 import CharRecScreen from "./screens/CharRecScreen"
 
 const styles = StyleSheet.create(
@@ -30,26 +31,6 @@ const styles = StyleSheet.create(
       paddingTop: 25
    }
 });
-
-
-class SecondScreen extends Component
-{
-   static navigationOptions =
-   {
-      title: 'Second Screen',
-   };
-
-   render()
-   {
-      return(
-         <View style = { styles.container }>
-            <Text style = { styles.text }>
-               Second Screen.
-            </Text>
-         </View>
-      );
-   }
-}
 
 
 const AppNavigator = createStackNavigator({

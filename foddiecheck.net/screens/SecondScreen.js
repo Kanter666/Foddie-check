@@ -1,4 +1,29 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Text, StyleSheet } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  Button,
+  View
+} from 'react-native';
 
-import { StackNavigator } from 'react-navigation';
+
+class FirstScreen extends React.Component
+{
+   static navigationOptions =
+      {
+      title: 'Second Screen'
+   };
+
+   render()
+   {
+      return(
+         <View>
+            <Text>
+               Place for your magic.
+            </Text>
+         </View>
+      );
+   }
+}
+export default FirstScreen;
