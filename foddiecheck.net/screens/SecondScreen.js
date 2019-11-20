@@ -12,7 +12,7 @@ class FirstScreen extends React.Component
 {
    static navigationOptions =
       {
-      title: 'Second Screen'
+      title: 'My Account'
    };
 
    render()

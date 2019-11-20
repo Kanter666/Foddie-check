@@ -12,7 +12,7 @@ class FirstScreen extends React.Component
 {
    static navigationOptions =
       {
-      title: 'First Screen'
+      title: 'My Achievements'
    };
 
    render()

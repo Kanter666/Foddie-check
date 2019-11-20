@@ -8,7 +8,7 @@ class FirstScreen extends React.Component
 {
    static navigationOptions =
       {
-      title: 'Character Recognition Screenn'
+      title: 'FoodCheck'
    };
 
    state = {
