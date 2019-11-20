@@ -18,8 +18,8 @@ class FirstScreen extends React.Component
    render()
    {
       return(
-         <View>
-            <Text>
+         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text >
                Place for your magic.
             </Text>
          </View>

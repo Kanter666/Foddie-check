@@ -15,30 +15,13 @@ class FirstScreen extends React.Component
       title: 'First Screen'
    };
 
-   gotoSecondScreen = () =>
-   {
-      this.props.navigation.navigate('Second');
-   }
-
-    gotoCharRecScreen = () =>
-    {
-       this.props.navigation.navigate('CharRec');
-    }
-
    render()
    {
       return(
-         <View>
+         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>
                First Screen.
             </Text>
-
-            <View>
-               <Button onPress = { this.gotoSecondScreen } title = 'Go To Second Screen'/>
-            </View>
-            <View>
-               <Button onPress = { this.gotoCharRecScreen } title = 'Go To Character Recognition Screen'/>
-            </View>
          </View>
       );
    }

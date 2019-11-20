@@ -6,7 +6,8 @@ import {
   Button,
   View
 } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import FirstScreen from "./screens/FirstScreen"
 import SecondScreen from "./screens/SecondScreen"
 import CharRecScreen from "./screens/CharRecScreen"
@@ -32,11 +33,10 @@ const styles = StyleSheet.create(
    }
 });
 
-
-const AppNavigator = createStackNavigator({
+const TabNavigator = createBottomTabNavigator({
    First: FirstScreen,
-   Second: SecondScreen,
-   CharRec: CharRecScreen
+   CharRec: CharRecScreen,
+   Second: SecondScreen
 });
 
-export default createAppContainer(AppNavigator);
+export default createAppContainer(TabNavigator);
