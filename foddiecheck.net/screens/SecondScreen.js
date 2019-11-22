@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
-  Button,
   View,
   FlatList,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import Constants from 'expo-constants';
 
+
+/* -------- HARD CODED CONSTANTS FOR NOW -------- */  
 const LISTDATA = [
   {
     id: 'settings',
@@ -27,7 +29,6 @@ const LISTDATA = [
   },
 ];
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,18 +42,35 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+    alignSelf: 'center'
   },
 });
+/*
+const [selected, setSelected] = React.useState(new Map());
+  
+const onSelect = React.useCallback(
+    id => {
+      const newSelected = new Map(selected);
+      newSelected.set(id, !selected.get(id));
 
+      setSelected(newSelected);
+    },
+    [selected],
+);
+*/
 
-function Item({ title }) {
-  return (
+/* --------- FUNCTIONS --------- */
+
+function Item({title}) {
+   return (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
     </View>
   );
 }
 
+
+/* -------- RENDERING OF SCREEN ----------- */
 
 class FirstScreen extends React.Component
 {
@@ -61,16 +79,21 @@ class FirstScreen extends React.Component
       title: 'My Account'
    };
 
-   render()
-   {
+   render() {
       return(
          <View style={styles.container}>
-           <View>
-            <Image style={{ width: '60%', height: '60%', alignSelf: 'center' }} resizeMode='contain' source={'../images/robot-dev.png'}/>
-           </View>
-           <FlatList
-              data={LISTDATA}
-              renderItem={({ item }) => <Item title={item.title} />}
+            <Image source={require('./robot-dev.png')} style={{ width: '60%', height: '60%', alignSelf: 'center' }} resizeMode='contain' />
+          
+
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{ fontSize: 20}}>
+              FoodCheck Username 
+            </Text>
+          </View>
+ 
+          <FlatList
+            data={LISTDATA}
+            renderItem={({ item }) => <Item title={item.title}/> }
               keyExtractor={item => item.id}
             />
          </View>
