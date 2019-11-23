@@ -10,6 +10,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import FirstScreen from "./screens/FirstScreen"
 import SecondScreen from "./screens/SecondScreen"
 import CharRecScreen from "./screens/CharRecScreen"
+import ImgPreviewScreen from "./screens/ImgPreviewScreen"
 
 const styles = StyleSheet.create(
 {
@@ -36,7 +37,8 @@ const styles = StyleSheet.create(
 const AppNavigator = createStackNavigator({
    First: FirstScreen,
    Second: SecondScreen,
-   CharRec: CharRecScreen
+   CharRec: CharRecScreen,
+   ImgPrew: ImgPreviewScreen
 });
 
 export default createAppContainer(AppNavigator);
