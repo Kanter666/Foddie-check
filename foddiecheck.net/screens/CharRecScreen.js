@@ -1,25 +1,51 @@
 import React, { Component } from 'react';
-import { Text, Alert, StyleSheet, TouchableOpacity, View, Button } from 'react-native';
+import { Text, Alert, StyleSheet, TouchableOpacity, View, TouchableHighlight,
+  Button , Dimensions, Image } from 'react-native';
 import MediaLibrary from 'expo';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
 
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#000',
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width
+  },
+  capture: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    borderWidth: 5,
+    borderColor: '#FFF',
+    marginBottom: 15,
+  },
+  cancel: {
+    position: 'absolute',
+    right: 20,
+    top: 20,
+    backgroundColor: 'transparent',
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 17,
+  }
+});
 
 class CharRecScreen extends React.Component
 {
    static navigationOptions =
       {
-      title: 'Character Recognition Screenn'
+      title: 'FoodCheck'
    };
-
-   gotoImgPrew = () =>
-   {
-     console.log('Going to new page');
-      this.props.navigation.navigate('ImgPrew', {
-          photo: this.state.photo, });
-   }
 
    state = {
      hasCameraPermission: null,
@@ -38,10 +64,47 @@ class CharRecScreen extends React.Component
                photo: data
            });
            console.log('Taked photo');
-           this.gotoImgPrew();
-           console.log("DONE");
        });
    }
+
+   renderCamera() {
+    return (
+      <Camera
+        ref={(cam) => {
+          this.camera = cam;
+        }}
+        style={styles.preview}
+        flashMode={Camera.Constants.FlashMode.off}
+        permissionDialogTitle={'Permission to use camera'}
+        permissionDialogMessage={'We need your permission to use your camera phone'}
+      >
+        <TouchableHighlight
+          style={styles.capture}
+          onPress={()=>this.takePicture()}
+          underlayColor="rgba(255, 255, 255, 0.5)"
+        >
+          <View />
+        </TouchableHighlight>
+      </Camera>
+    );
+  }
+
+  renderImage() {
+    return (
+      <View>
+        <Image
+          source={{ uri: this.state.photo.uri }}
+          style={styles.preview}
+        />
+        <Text
+          style={styles.cancel}
+          onPress={() => this.setState({ photo: null })}
+        >Cancel
+        </Text>
+      </View>
+    );
+  }
+
 
    render() {
      const { hasCameraPermission } = this.state;
@@ -50,40 +113,11 @@ class CharRecScreen extends React.Component
      } else if (hasCameraPermission === false) {
        return <Text>No access to camera</Text>;
      } else {
-       return (
-         <View style={{ flex: 1 }}>
-           <View style={{ flex: 0.9 }}>
-             <Camera style={{ flex: 1 }}
-             ref={ (ref) => {this.camera = ref} }
-             type={this.state.type}>
-               <View
-                 style={{
-                   flex: 1,
-                   backgroundColor: 'transparent',
-                   flexDirection: 'row',
-                 }}>
-                 <TouchableOpacity
-                   style={{
-                     flex: 0.1,
-                     alignSelf: 'flex-end',
-                     alignItems: 'center',
-                   }}
-                   onPress={() => {this.setState({
-                     type:
-                       this.state.type === Camera.Constants.Type.back
-                         ? Camera.Constants.Type.front
-                         : Camera.Constants.Type.back,
-                   });}}>
-                   <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
-                 </TouchableOpacity>
-               </View>
-             </Camera>
-           </View>
-           <View  style={{ height: 1.0, flex: 0.1 }}>
-              <Button onPress={()=>this.takePicture()} title = 'Take snapshot'/>
-           </View>
-         </View>
-        );
+    return (
+      <View style={styles.container}>
+        {this.state.photo ? this.renderImage() : this.renderCamera()}
+      </View>
+    );
      }
    }
  }
