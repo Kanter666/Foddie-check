@@ -29,14 +29,23 @@ const styles = StyleSheet.create({
     borderColor: '#FFF',
     marginBottom: 15,
   },
-  cancel: {
+  retake: {
     position: 'absolute',
-    right: 20,
-    top: 20,
+    left: 30,
+    bottom: 30,
     backgroundColor: 'transparent',
     color: '#FFF',
     fontWeight: '600',
-    fontSize: 17,
+    fontSize: 20,
+  },
+  rank: {
+    position: 'absolute',
+    right: 30,
+    bottom: 30,
+    backgroundColor: 'transparent',
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 20,
   }
 });
 
@@ -97,9 +106,14 @@ class CharRecScreen extends React.Component
           style={styles.preview}
         />
         <Text
-          style={styles.cancel}
+          style={styles.retake}
           onPress={() => this.setState({ photo: null })}
-        >Cancel
+        >Retake
+        </Text>
+        <Text
+          style={styles.rank}
+          onPress={() => this.props.navigation.navigate('First')}
+        >Use
         </Text>
       </View>
     );

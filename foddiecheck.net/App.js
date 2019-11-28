@@ -12,7 +12,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FirstScreen from "./screens/FirstScreen"
 import SecondScreen from "./screens/SecondScreen"
 import CharRecScreen from "./screens/CharRecScreen"
-import ImgPreviewScreen from "./screens/ImgPreviewScreen"
 
 const styles = StyleSheet.create(
 {
@@ -39,7 +38,7 @@ const TabNavigator = createBottomTabNavigator({
      First: FirstScreen,
      CharRec: CharRecScreen,
      Second: SecondScreen },
-  {  
+  {
       defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, horizontal, tintColor }) => {
           const { routeName } = navigation.state;
@@ -47,14 +46,14 @@ const TabNavigator = createBottomTabNavigator({
           let iconName;
           if (routeName === 'First') {
             iconName = 'ios-stats';
-          } 
+          }
           else if (routeName === 'CharRec') {
             iconName = `ios-camera`;
           }
           else if (routeName === 'Second') {
             iconName = `ios-person`;
           }
- 
+
           // You can return any component that you like here!
           return <IconComponent name={iconName} size={25} color={tintColor} />;
         },
@@ -67,4 +66,3 @@ const TabNavigator = createBottomTabNavigator({
 );
 
 export default createAppContainer(TabNavigator);
-   ImgPrew: ImgPreviewScreen
